@@ -1,0 +1,404 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+	title="Documentation"
+	description="Comprehensive guide to using API Calls, including scripting, collections, and workspaces."
+>
+	<div class="bg-bg py-16 transition-colors duration-200">
+		<div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+			<div class="text-center">
+				<h1 class="text-3xl font-extrabold text-text sm:text-4xl">Usage Documentation</h1>
+				<p class="mt-4 text-lg text-text-muted">Master API Calls with this comprehensive guide.</p>
+			</div>
+
+			<div class="mt-12 space-y-12">
+				<!-- Goal -->
+				<section>
+					<h2 class="text-2xl font-bold text-text">Goal</h2>
+					<p class="mt-4 text-base text-text-muted">
+						API Calls helps you exercise REST services without relying on a browser or external
+						tools. It lets you craft HTTP requests, send them, inspect responses, and organise them
+						into tabs, collections, and workspaces.
+					</p>
+					<div class="mt-6 rounded-md overflow-hidden">
+						<img src="/images/api-calls.png" alt="Api Calls Interface" class="w-full h-auto" />
+					</div>
+				</section>
+
+				<!-- Requirements -->
+				<section>
+					<h2 class="text-2xl font-bold text-text">Requirements and Installation</h2>
+					<ul class="mt-4 list-disc space-y-2 pl-5 text-text-muted">
+						<li>
+							<strong class="text-text">Official packages</strong>: download the latest release for
+							Linux, macOS, or Windows from GitHub Releases.
+						</li>
+						<li>
+							<strong class="text-text">Arch Linux</strong>: available through the <code
+								class="rounded bg-surface px-1 py-0.5 text-sm font-mono text-primary"
+								>api-calls-bin</code
+							> package (AUR).
+						</li>
+						<li>
+							<strong class="text-text">Running from source</strong>:
+							<ol class="mt-2 list-decimal space-y-1 pl-5">
+								<li>
+									<code class="rounded bg-surface px-1 py-0.5 text-sm font-mono text-primary"
+										>npm install</code
+									>
+								</li>
+								<li>
+									<code class="rounded bg-surface px-1 py-0.5 text-sm font-mono text-primary"
+										>npm run dev</code
+									> to launch the application in development mode.
+								</li>
+								<li>
+									<code class="rounded bg-surface px-1 py-0.5 text-sm font-mono text-primary"
+										>npm run build:&lt;platform&gt;</code
+									> to generate installers (linux/mac/win).
+								</li>
+							</ol>
+						</li>
+					</ul>
+				</section>
+
+				<!-- First Run -->
+				<section>
+					<h2 class="text-2xl font-bold text-text">First Run</h2>
+					<ol class="mt-4 list-decimal space-y-2 pl-5 text-text-muted">
+						<li>On launch, the default workspace opens with the side menu collapsed.</li>
+						<li>
+							Click <strong class="text-text">New Tab</strong> (the <code
+								class="rounded bg-surface px-1 py-0.5 text-sm font-mono text-primary">+</code
+							> icon or <code class="rounded bg-surface px-1 py-0.5 text-sm font-mono text-primary"
+								>Ctrl/Cmd+T</code
+							>) to prepare a new request.
+						</li>
+						<li>Choose the HTTP method, enter the URL, and add the required parameters or body.</li>
+						<li>
+							Press <code class="rounded bg-surface px-1 py-0.5 text-sm font-mono text-primary"
+								>Ctrl/Cmd+Enter</code
+							> or the <strong class="text-text">Send</strong> button to execute the request.
+						</li>
+						<li>Review the response at the bottom: status, duration, size, and body.</li>
+					</ol>
+				</section>
+
+				<!-- Interface -->
+				<section>
+					<h2 class="text-2xl font-bold text-text">Interface at a Glance</h2>
+					<ul class="mt-4 list-disc space-y-2 pl-5 text-text-muted">
+						<li>
+							<strong class="text-text">Optional top menu</strong>: quick access to actions, view,
+							tools, and updates (toggle from Settings or <code
+								class="rounded bg-surface px-1 py-0.5 text-sm font-mono text-primary"
+								>Ctrl/Cmd+M</code
+							>).
+						</li>
+						<li>
+							<strong class="text-text">Side menu</strong>: tabs for <em>Collections</em>, <em
+								>Environments</em
+							>, <em>History</em>, <em>Cookies</em>, and <em>Settings</em> (switch via shortcuts).
+						</li>
+						<li>
+							<strong class="text-text">Side panel</strong>: displays the content of the selected
+							section (collection tree, environments, etc.).
+						</li>
+						<li>
+							<strong class="text-text">Central tabs</strong>: request editor, header/body
+							configuration, and response viewer. Tabs support drag-and-drop reordering.
+						</li>
+						<li>
+							<strong class="text-text">Bottom console</strong>: log of sent requests and debugging
+							messages.
+						</li>
+					</ul>
+				</section>
+
+				<!-- Building Requests -->
+				<section>
+					<h2 class="text-2xl font-bold text-text">Building and Sending Requests</h2>
+					<ol class="mt-4 list-decimal space-y-2 pl-5 text-text-muted">
+						<li>
+							<strong>Method and URL</strong>: use the selectors for GET, POST, PUT, and more. URLs
+							auto-complete with environment variables when selected.
+						</li>
+						<li><strong>Query parameters</strong>: add rows in the <em>Params</em> section.</li>
+						<li>
+							<strong>Headers</strong>: add request headers. I will overwrite collection headers.
+						</li>
+						<li>
+							<strong>Body</strong>: choose the mode (JSON, YAML, text, form-data,
+							x-www-form-urlencoded, file). The Monaco-based editor offers syntax highlighting.
+						</li>
+						<li>
+							<strong>Authentication</strong>: configure Bearer, Basic, or custom tokens from the <em
+								>Auth</em
+							> tab.
+						</li>
+						<li>
+							<strong>Environment</strong>: assign variables via <em>Environment</em> (collections can
+							specify a preferred environment).
+						</li>
+						<li>
+							<strong>Send and cancel</strong>: <code
+								class="rounded bg-surface px-1 py-0.5 text-sm font-mono text-primary"
+								>Ctrl/Cmd+Enter</code
+							> sends the request, <code
+								class="rounded bg-surface px-1 py-0.5 text-sm font-mono text-primary">Esc</code
+							> cancels it.
+						</li>
+					</ol>
+				</section>
+
+				<!-- Scripting -->
+				<section>
+					<h2 class="text-2xl font-bold text-text">Scripting</h2>
+					<p class="mt-4 text-base text-text-muted">
+						You can write JavaScript code to execute before a request is sent (Pre-request Script)
+						or after a response is received (Post-request Script).
+					</p>
+
+					<h3 class="mt-6 text-xl font-bold text-text">Available Resources</h3>
+					<ul class="mt-4 list-disc space-y-2 pl-5 text-text-muted">
+						<li>
+							<strong>console</strong>: Use <code>console.log(message)</code> or <code
+								>console.error(message)</code
+							>.
+						</li>
+						<li>
+							<strong>environment</strong>: access and modify environment variables.
+							<ul class="mt-1 list-circle pl-5">
+								<li><code>environment.get(key)</code></li>
+								<li><code>environment.set(key, value)</code></li>
+								<li><code>environment.unset(key)</code></li>
+							</ul>
+						</li>
+						<li>
+							<strong>http</strong>: Make asynchronous HTTP requests directly from your script.
+							<ul class="mt-1 list-circle pl-5">
+								<li><code>await http.get(url, headers)</code></li>
+								<li><code>await http.post(url, body, headers)</code></li>
+							</ul>
+						</li>
+						<li><strong>request</strong>: Access the current request details.</li>
+						<li><strong>response</strong> (Post-script only): Access the received response.</li>
+					</ul>
+				</section>
+
+				<!-- Managing Tabs -->
+				<section>
+					<h2 class="text-2xl font-bold text-text">Managing Tabs</h2>
+					<ul class="mt-4 list-disc space-y-2 pl-5 text-text-muted">
+						<li>
+							<strong>Duplicate</strong>: right-click a tab and choose <em>Duplicate tab</em>.
+						</li>
+						<li>
+							<strong>Restore</strong>: <code
+								class="rounded bg-surface px-1 py-0.5 text-sm font-mono text-primary"
+								>Ctrl/Cmd+Shift+T</code
+							> reopens the last closed tab.
+						</li>
+						<li><strong>Move</strong>: drag tabs to reorder them.</li>
+						<li>
+							<strong>Search</strong>: open the tab switcher with <code
+								class="rounded bg-surface px-1 py-0.5 text-sm font-mono text-primary"
+								>Ctrl/Cmd+O</code
+							> to find a tab by name.
+						</li>
+						<li>
+							<strong>Close</strong>: <code
+								class="rounded bg-surface px-1 py-0.5 text-sm font-mono text-primary"
+								>Ctrl/Cmd+W</code
+							> closes the active tab.
+						</li>
+						<li>
+							<strong>Bulk close</strong>: right-click for <em>Close others</em> or <em
+								>Close all</em
+							>.
+						</li>
+						<li>
+							<strong>Save a request</strong>: <code
+								class="rounded bg-surface px-1 py-0.5 text-sm font-mono text-primary"
+								>Ctrl/Cmd+S</code
+							> saves to the linked collection.
+						</li>
+					</ul>
+				</section>
+
+				<!-- Collections -->
+				<section>
+					<h2 class="text-2xl font-bold text-text">Collections</h2>
+					<ul class="mt-4 list-disc space-y-2 pl-5 text-text-muted">
+						<li>Create folders and sub-folders to group related requests.</li>
+						<li>
+							Assigning an environment to a collection propagates default variables to linked tabs.
+						</li>
+						<li>Use <em>Pre-request Script</em> to run JavaScript before sending a request.</li>
+						<li>
+							Import and export from the context menu: supports Postman v2, OpenAPI, and custom
+							YAML/JSON files.
+						</li>
+						<li>Define collection headers that will be sent on requests.</li>
+					</ul>
+				</section>
+
+				<!-- Environments and Variables -->
+				<section>
+					<h2 class="text-2xl font-bold text-text">Environments and Variables</h2>
+					<ul class="mt-4 list-disc space-y-2 pl-5 text-text-muted">
+						<li>
+							Define environments (dev, staging, prod) with key/value pairs.
+							<ul class="mt-1 list-circle pl-5">
+								<li>
+									Insert variables as <code>{`{{variable}}`}</code> in URLs, headers, or bodies.
+								</li>
+								<li>Define environment headers that will be sent on requests.</li>
+							</ul>
+						</li>
+						<li>Duplicate, reorder, or export complete environments as needed.</li>
+						<li>Pick the active environment per tab from the request toolbar.</li>
+					</ul>
+				</section>
+
+				<!-- History and Cookies -->
+				<section>
+					<h2 class="text-2xl font-bold text-text">History and Cookies</h2>
+					<ul class="mt-4 list-disc space-y-2 pl-5 text-text-muted">
+						<li>
+							<strong>History</strong>: stores up to <code>maxHistory</code> requests. Reopen entries
+							as tabs or clear them in bulk.
+						</li>
+						<li>
+							<strong>Cookies</strong>: when <em>Manage cookies</em> is enabled, stored cookies are listed
+							and can be cleared per domain.
+						</li>
+					</ul>
+				</section>
+
+				<!-- Workspaces -->
+				<section>
+					<h2 class="text-2xl font-bold text-text">Workspaces</h2>
+					<ul class="mt-4 list-disc space-y-2 pl-5 text-text-muted">
+						<li>Separate collections, environments, tabs, and cookies per project.</li>
+						<li>Access the list and workspace actions from the side menu.</li>
+						<li>
+							Create, duplicate, rename, and remove workspaces. Each workspace is stored in its own
+							file.
+						</li>
+					</ul>
+				</section>
+
+				<!-- Settings -->
+				<section>
+					<h2 class="text-2xl font-bold text-text">Settings</h2>
+					<ul class="mt-4 list-disc space-y-2 pl-5 text-text-muted">
+						<li><strong>Appearance</strong>: Theme, Window mode, Request orientation.</li>
+						<li><strong>Behavior</strong>: Menu visibility, Auto-scroll, Notifications.</li>
+						<li><strong>Network</strong>: Request timeout, Redirect handling, SSL rejection.</li>
+						<li>
+							<strong>Default headers</strong>: define headers that should be applied automatically.
+						</li>
+					</ul>
+				</section>
+
+				<!-- Auto Updates -->
+				<section>
+					<h2 class="text-2xl font-bold text-text">Auto Updates (Beta)</h2>
+					<ul class="mt-4 list-disc space-y-2 pl-5 text-text-muted">
+						<li>On macOS and Windows, the app checks for updates in the background.</li>
+						<li>On Linux, install new versions manually.</li>
+					</ul>
+				</section>
+
+				<!-- Essential Shortcuts -->
+				<section>
+					<h2 class="text-2xl font-bold text-text">Essential Shortcuts</h2>
+					<div class="mt-4 grid grid-cols-1 gap-6 sm:grid-cols-2">
+						<div>
+							<h3 class="font-bold text-text">Tabs</h3>
+							<ul class="mt-2 list-none space-y-1 text-text-muted">
+								<li>
+									<code class="rounded bg-surface px-1 py-0.5 text-sm font-mono text-primary"
+										>Ctrl/Cmd+T</code
+									> - New tab
+								</li>
+								<li>
+									<code class="rounded bg-surface px-1 py-0.5 text-sm font-mono text-primary"
+										>Ctrl/Cmd+W</code
+									> - Close tab
+								</li>
+								<li>
+									<code class="rounded bg-surface px-1 py-0.5 text-sm font-mono text-primary"
+										>Ctrl+Tab</code
+									> - Navigate tabs
+								</li>
+								<li>
+									<code class="rounded bg-surface px-1 py-0.5 text-sm font-mono text-primary"
+										>Ctrl/Cmd+Shift+T</code
+									> - Restore tab
+								</li>
+							</ul>
+						</div>
+						<div>
+							<h3 class="font-bold text-text">Requests</h3>
+							<ul class="mt-2 list-none space-y-1 text-text-muted">
+								<li>
+									<code class="rounded bg-surface px-1 py-0.5 text-sm font-mono text-primary"
+										>Ctrl/Cmd+Enter</code
+									> - Send request
+								</li>
+								<li>
+									<code class="rounded bg-surface px-1 py-0.5 text-sm font-mono text-primary"
+										>Ctrl/Cmd+S</code
+									> - Save request
+								</li>
+								<li>
+									<code class="rounded bg-surface px-1 py-0.5 text-sm font-mono text-primary"
+										>Esc</code
+									> - Cancel request
+								</li>
+							</ul>
+						</div>
+					</div>
+				</section>
+
+				<!-- Tips -->
+				<section>
+					<h2 class="text-2xl font-bold text-text">Tips and Troubleshooting</h2>
+					<ul class="mt-4 list-disc space-y-2 pl-5 text-text-muted">
+						<li>
+							If an HTTPS call fails, temporarily disable <em>Reject unauthorized</em> in Settings.
+						</li>
+						<li>Check the bottom console for validation messages.</li>
+						<li>Use <em>Restore tab</em> to recover accidentally closed tabs.</li>
+					</ul>
+				</section>
+
+				<!-- Where Data Lives -->
+				<section>
+					<h2 class="text-2xl font-bold text-text">Where Data Lives</h2>
+					<p class="mt-4 text-base text-text-muted">
+						Collections, environments, tabs, and cookies are stored per workspace under Electron's
+						user data directory.
+					</p>
+				</section>
+
+				<!-- Additional Resources -->
+				<section>
+					<h2 class="text-2xl font-bold text-text">Additional Resources</h2>
+					<ul class="mt-4 list-disc space-y-2 pl-5 text-text-muted">
+						<li>
+							<a href="https://github.com/elpeix/apicalls" class="text-primary hover:underline"
+								>GitHub repository</a
+							>
+						</li>
+						<li>Issues: use <strong>Help > Submit bug</strong> or open a GitHub ticket.</li>
+					</ul>
+				</section>
+			</div>
+		</div>
+	</div>
+</Layout>

@@ -1,0 +1,90 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Icon from "../components/Icon.astro";
+
+const features = [
+	{
+		title: "Organized Workspaces",
+		description:
+			"Keep your projects separate. Workspaces allow you to manage distinct collections, environments, and cookies for every context.",
+		icon: "folder",
+	},
+	{
+		title: "Powerful Scripting",
+		description:
+			"Automate your workflow with JavaScript. Write pre-request scripts to generate tokens and post-request scripts to validate responses.",
+		icon: "edit", // "edit" seems closest to scripting/writing
+	},
+	{
+		title: "Privacy Focused",
+		description:
+			"No cloud sync, no tracking. Your data is stored locally on your machine, ensuring your API credentials remain secure.",
+		icon: "file",
+	},
+	{
+		title: "Environments & Variables",
+		description:
+			"Switch between Dev, Staging, and Prod seamlessly. Use variables in URLs, headers, and bodies to avoid repetition.",
+		icon: "environment",
+	},
+	{
+		title: "Keyboard First",
+		description:
+			"Designed for speed. Use shortcuts for everything from sending requests (Ctrl+Enter) to switching tabs and environments.",
+		icon: "send",
+	},
+	{
+		title: "Import & Export",
+		description:
+			"Move your data easily. Support for importing from Postman, OpenAPI, and JSON/YAML ensures you're never locked in.",
+		icon: "folder-open",
+	},
+];
+---
+
+<Layout
+	title="Features"
+	description="Discover the powerful features of API Calls: Workspaces, Scripting, Privacy, and more."
+>
+	<div class="bg-bg py-24">
+		<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+			<div class="text-center">
+				<h1 class="text-4xl font-extrabold text-text sm:text-5xl">
+					Powerful Features for
+					<span class="text-primary">Modern Developers</span>
+				</h1>
+				<p class="mx-auto mt-4 max-w-2xl text-xl text-text-muted">
+					Everything you need to build, test, and document your APIs efficiently.
+				</p>
+			</div>
+
+			<div class="mt-20">
+				<div class="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3">
+					{
+						features.map((feature) => (
+							<div class="flex flex-col rounded-2xl border border-border bg-surface p-8 shadow-sm transition-all hover:shadow-md">
+								<div class="mb-6 flex h-14 w-14 items-center justify-center rounded-lg bg-bg text-primary border border-border shadow-sm p-3">
+									<Icon name={feature.icon} size={32} />
+								</div>
+								<h3 class="text-xl font-bold text-text">{feature.title}</h3>
+								<p class="mt-4 flex-1 text-base leading-relaxed text-text-muted">
+									{feature.description}
+								</p>
+							</div>
+						))
+					}
+				</div>
+			</div>
+
+			<!-- Call to Action -->
+			<div class="mt-24 text-center">
+				<a
+					href="/doc"
+					class="inline-flex items-center justify-center rounded-lg border border-transparent bg-primary px-8 py-3 text-base font-medium text-white shadow-sm hover:opacity-90 transition-opacity"
+				>
+					Read the Documentation
+				</a>
+			</div>
+		</div>
+	</div>
+</Layout>

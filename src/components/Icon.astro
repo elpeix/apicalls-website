@@ -1,0 +1,13 @@
+---
+interface Props extends astroHTML.JSX.SVGAttributes {
+	name: string;
+	class?: string;
+	size?: number;
+}
+
+const { name, class: className = "", size = 24, ...rest } = Astro.props;
+---
+
+<svg class={className} width={size} height={size} aria-hidden="true" fill="currentColor" {...rest}>
+	<use href={`/icons.svg#${name}`}></use>
+</svg>
