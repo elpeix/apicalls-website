@@ -116,16 +116,27 @@
 		const themeDropdown = document.getElementById("theme-dropdown");
 		const themeButtons = document.querySelectorAll("[data-theme-value]");
 
+		if (!themeTogglebtn || !themeDropdown) return;
+
+		// Check if already initialized (avoid duplicate listeners)
+		if (themeTogglebtn.dataset.initialized) {
+			// Just update the icon
+			const currentTheme = localStorage.getItem("theme") || "system";
+			updateIcon(currentTheme);
+			return;
+		}
+		themeTogglebtn.dataset.initialized = "true";
+
 		// Toggle Dropdown
-		themeTogglebtn?.addEventListener("click", (e) => {
+		themeTogglebtn.addEventListener("click", (e) => {
 			e.stopPropagation();
-			themeDropdown?.classList.toggle("hidden");
+			themeDropdown.classList.toggle("hidden");
 		});
 
 		// Close dropdown on outside click
 		document.addEventListener("click", (e) => {
-			if (!themeTogglebtn?.contains(e.target as Node) && !themeDropdown?.contains(e.target as Node)) {
-				themeDropdown?.classList.add("hidden");
+			if (!themeTogglebtn.contains(e.target as Node) && !themeDropdown.contains(e.target as Node)) {
+				themeDropdown.classList.add("hidden");
 			}
 		});
 
@@ -135,7 +146,7 @@
 				const theme = btn.getAttribute("data-theme-value");
 				if (theme) {
 					setTheme(theme);
-					themeDropdown?.classList.add("hidden");
+					themeDropdown.classList.add("hidden");
 				}
 			});
 		});
@@ -179,8 +190,12 @@
 		else systemIcon?.classList.remove("hidden");
 	}
 
-	// Initialize on first load
-	initThemeToggle();
+	// Initialize when DOM is ready
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", initThemeToggle);
+	} else {
+		initThemeToggle();
+	}
 
 	// Re-initialize after View Transitions
 	document.addEventListener("astro:page-load", initThemeToggle);
