@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { Code } from "astro:components";
 
 const sections = [
 	{ id: "goal", title: "Goal" },
@@ -282,27 +283,61 @@ const sections = [
 							<h3 class="mt-6 text-xl font-bold text-text">Available Resources</h3>
 							<ul class="mt-4 list-disc space-y-2 pl-5 text-text-muted">
 								<li>
-									<strong>console</strong>: Use <code>console.log(message)</code> or <code
+									<strong>console</strong>: Use <code
+										class="rounded bg-surface px-1 py-0.5 text-sm font-mono text-primary"
+										>console.log(message)</code
+									> or <code
+										class="rounded bg-surface px-1 py-0.5 text-sm font-mono text-primary"
 										>console.error(message)</code
 									>. Output appears in the bottom console.
 								</li>
 								<li>
 									<strong>environment</strong>: access and modify environment variables.
 									<ul class="mt-1 list-circle pl-5">
-										<li><code>environment.get(key)</code> - retrieve a variable value</li>
-										<li><code>environment.set(key, value)</code> - set or update a variable</li>
-										<li><code>environment.unset(key)</code> - remove a variable</li>
+										<li>
+											<code class="rounded bg-surface px-1 py-0.5 text-sm font-mono text-primary"
+												>environment.get(key)</code
+											> - retrieve a variable value
+										</li>
+										<li>
+											<code class="rounded bg-surface px-1 py-0.5 text-sm font-mono text-primary"
+												>environment.set(key, value)</code
+											> - set or update a variable
+										</li>
+										<li>
+											<code class="rounded bg-surface px-1 py-0.5 text-sm font-mono text-primary"
+												>environment.unset(key)</code
+											> - remove a variable
+										</li>
 									</ul>
 								</li>
 								<li>
 									<strong>http</strong>: Make asynchronous HTTP requests directly from your script.
 									<ul class="mt-1 list-circle pl-5">
-										<li><code>await http.get(url, headers)</code></li>
-										<li><code>await http.post(url, body, headers)</code></li>
-										<li><code>await http.put(url, body, headers)</code></li>
-										<li><code>await http.delete(url, headers)</code></li>
 										<li>
-											<code>await http.request(method, url, body, headers)</code> - for any HTTP method
+											<code class="rounded bg-surface px-1 py-0.5 text-sm font-mono text-primary"
+												>await http.get(url, headers)</code
+											>
+										</li>
+										<li>
+											<code class="rounded bg-surface px-1 py-0.5 text-sm font-mono text-primary"
+												>await http.post(url, body, headers)</code
+											>
+										</li>
+										<li>
+											<code class="rounded bg-surface px-1 py-0.5 text-sm font-mono text-primary"
+												>await http.put(url, body, headers)</code
+											>
+										</li>
+										<li>
+											<code class="rounded bg-surface px-1 py-0.5 text-sm font-mono text-primary"
+												>await http.delete(url, headers)</code
+											>
+										</li>
+										<li>
+											<code class="rounded bg-surface px-1 py-0.5 text-sm font-mono text-primary"
+												>await http.request(method, url, body, headers)</code
+											> - for any HTTP method
 										</li>
 									</ul>
 								</li>
@@ -322,26 +357,36 @@ const sections = [
 									<p class="text-sm font-medium text-text mb-2">
 										Pre-request: Generate authentication token
 									</p>
-									<pre
-										class="rounded-lg bg-surface p-4 text-sm font-mono text-text-muted overflow-x-auto border border-border"><code>// Fetch a token before sending the request
-const res = await http.post('https://api.example.com/auth', {`{
+									<div class="code-block rounded-lg overflow-hidden border border-border [&_pre]:!m-0 [&_pre]:!rounded-none [&_pre]:!p-4">
+										<Code
+											code={`// Fetch a token before sending the request
+const res = await http.post('https://api.example.com/auth', {
   username: environment.get('user'),
   password: environment.get('pass')
-}`});
+});
 environment.set('token', res.body.access_token);
-console.log('Token refreshed');</code></pre>
+console.log('Token refreshed');`}
+											lang="javascript"
+											themes={{ light: "github-light", dark: "github-dark" }}
+										/>
+									</div>
 								</div>
 								<div>
 									<p class="text-sm font-medium text-text mb-2">Post-request: Validate response</p>
-									<pre
-										class="rounded-lg bg-surface p-4 text-sm font-mono text-text-muted overflow-x-auto border border-border"><code>// Check response status and extract data
-if (response.status === 200) {`{
+									<div class="code-block rounded-lg overflow-hidden border border-border [&_pre]:!m-0 [&_pre]:!rounded-none [&_pre]:!p-4">
+										<Code
+											code={`// Check response status and extract data
+if (response.status === 200) {
   const data = JSON.parse(response.body);
   environment.set('userId', data.id);
   console.log('User ID saved:', data.id);
-}`} else {`{
+} else {
   console.error('Request failed:', response.status);
-}`}</code></pre>
+}`}
+											lang="javascript"
+											themes={{ light: "github-light", dark: "github-dark" }}
+										/>
+									</div>
 								</div>
 							</div>
 						</section>
@@ -688,6 +733,10 @@ if (response.status === 200) {`{
 								Collections, environments, tabs, and cookies are stored per workspace under
 								Electron's user data directory.
 							</p>
+							<p class="mt-4 text-base text-text-muted">
+								<strong class="text-text">No telemetry</strong>: API Calls does not collect or send
+								any data to external servers. All your data stays on your machine.
+							</p>
 						</section>
 
 						<!-- Additional Resources -->
@@ -714,6 +763,17 @@ if (response.status === 200) {`{
 		color: var(--color-primary);
 		border-color: var(--color-primary);
 		font-weight: 500;
+	}
+</style>
+
+<style is:global>
+	/* Shiki dual theme support for class-based dark mode */
+	.dark .code-block pre {
+		background-color: var(--shiki-dark-bg) !important;
+		color: var(--shiki-dark) !important;
+	}
+	.dark .code-block pre span {
+		color: var(--shiki-dark) !important;
 	}
 </style>
 
