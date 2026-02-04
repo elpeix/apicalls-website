@@ -111,33 +111,39 @@
 </div>
 
 <script>
-	const themeTogglebtn = document.getElementById("theme-toggle-btn");
-	const themeDropdown = document.getElementById("theme-dropdown");
-	const themeButtons = document.querySelectorAll("[data-theme-value]");
+	function initThemeToggle() {
+		const themeTogglebtn = document.getElementById("theme-toggle-btn");
+		const themeDropdown = document.getElementById("theme-dropdown");
+		const themeButtons = document.querySelectorAll("[data-theme-value]");
 
-	// Toggle Dropdown
-	themeTogglebtn?.addEventListener("click", (e) => {
-		e.stopPropagation();
-		themeDropdown?.classList.toggle("hidden");
-	});
+		// Toggle Dropdown
+		themeTogglebtn?.addEventListener("click", (e) => {
+			e.stopPropagation();
+			themeDropdown?.classList.toggle("hidden");
+		});
 
-	// Close dropdown on outside click
-	document.addEventListener("click", (e) => {
-		if (!themeTogglebtn?.contains(e.target as Node) && !themeDropdown?.contains(e.target as Node)) {
-			themeDropdown?.classList.add("hidden");
-		}
-	});
-
-	// Handle Theme Selection
-	themeButtons.forEach((btn) => {
-		btn.addEventListener("click", () => {
-			const theme = btn.getAttribute("data-theme-value");
-			if (theme) {
-				setTheme(theme);
+		// Close dropdown on outside click
+		document.addEventListener("click", (e) => {
+			if (!themeTogglebtn?.contains(e.target as Node) && !themeDropdown?.contains(e.target as Node)) {
 				themeDropdown?.classList.add("hidden");
 			}
 		});
-	});
+
+		// Handle Theme Selection
+		themeButtons.forEach((btn) => {
+			btn.addEventListener("click", () => {
+				const theme = btn.getAttribute("data-theme-value");
+				if (theme) {
+					setTheme(theme);
+					themeDropdown?.classList.add("hidden");
+				}
+			});
+		});
+
+		// Initialize Icon
+		const currentTheme = localStorage.getItem("theme") || "system";
+		updateIcon(currentTheme);
+	}
 
 	function setTheme(theme: string) {
 		localStorage.setItem("theme", theme);
@@ -173,8 +179,9 @@
 		else systemIcon?.classList.remove("hidden");
 	}
 
-	// Initialize Icon on load (checking localStorage or default to system)
-	// Logic here handles the UI state (icon), the blocking script in Layout handles the immediate class application
-	const currentTheme = localStorage.getItem("theme") || "system";
-	updateIcon(currentTheme);
+	// Initialize on first load
+	initThemeToggle();
+
+	// Re-initialize after View Transitions
+	document.addEventListener("astro:page-load", initThemeToggle);
 </script>

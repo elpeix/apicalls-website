@@ -2,116 +2,221 @@
 import Layout from "../layouts/Layout.astro";
 import Icon from "../components/Icon.astro";
 import ImageSlider from "../components/ImageSlider.astro";
+
+const features = [
+	{
+		icon: "collection",
+		title: "Collections",
+		description: "Organize your requests into folders and collections.",
+		link: "/doc#collections",
+	},
+	{
+		icon: "environment",
+		title: "Environments",
+		description: "Switch between development, staging, and production.",
+		link: "/doc#environments",
+	},
+	{
+		icon: "cookies",
+		title: "Cookies",
+		description: "Manage per-domain cookies automatically or manually.",
+		link: "/doc#history-cookies",
+	},
+	{
+		icon: "history",
+		title: "History",
+		description: "Never lose a request. Search your full request history.",
+		link: "/doc#history-cookies",
+	},
+];
+
+const highlights = [
+	{ text: "Open Source" },
+	{ text: "Privacy First" },
+	{ text: "Cross Platform" },
+];
 ---
 
 <Layout
 	title="Open Source REST Client"
 	description="A local-first, privacy-focused REST API client for developers. Test APIs efficiently with organized workspaces and powerful scripting."
 >
-	<div class="relative overflow-hidden pt-16 pb-32 space-y-24">
+	<div class="relative overflow-hidden">
+		<!-- Background gradient -->
+		<div
+			class="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent pointer-events-none"
+		>
+		</div>
+
 		<!-- Hero Section -->
-		<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
-			<div class="lg:grid lg:grid-cols-12 lg:gap-8">
-				<div class="sm:text-center md:mx-auto md:max-w-2xl lg:col-span-6 lg:text-left">
-					<h1 class="text-4xl font-extrabold tracking-tight text-text sm:text-5xl md:text-6xl">
-						<span class="block">The local-first</span>
-						<span class="block text-primary">REST API Client</span>
-					</h1>
-					<p
-						class="mt-3 text-base text-text-muted sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0"
-					>
-						A lightweight, privacy-focused tool for testing APIs. No cloud, no login, just you and
-						your requests. Open source and built for speed.
-					</p>
-					<div class="mt-8 sm:max-w-lg sm:mx-auto sm:text-center lg:text-left lg:mx-0">
-						<div
-							class="mt-5 sm:mt-8 flex flex-col sm:flex-row sm:justify-center lg:justify-start gap-4"
+		<div class="relative pt-16 pb-20 sm:pt-24 sm:pb-32">
+			<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+				<div class="lg:grid lg:grid-cols-12 lg:gap-12 items-center">
+					<div class="sm:text-center lg:col-span-5 lg:text-left">
+						<!-- Highlight badges -->
+						<div class="flex flex-wrap gap-2 justify-center lg:justify-start mb-6">
+							{
+								highlights.map((item) => (
+									<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-primary/10 text-primary ring-1 ring-primary/20">
+										{item.text}
+									</span>
+								))
+							}
+						</div>
+
+						<h1
+							class="text-4xl font-extrabold tracking-tight text-text sm:text-5xl lg:text-6xl"
 						>
+							<span class="block">The local-first</span>
+							<span class="block text-primary mt-1">REST API Client</span>
+						</h1>
+
+						<p class="mt-6 text-lg text-text-muted sm:text-xl max-w-xl mx-auto lg:mx-0">
+							A lightweight, privacy-focused tool for testing APIs. No cloud, no login, just you
+							and your requests. Open source and built for speed.
+						</p>
+
+						<!-- CTA Buttons -->
+						<div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
 							<a
 								href="https://github.com/elpeix/apicalls/releases/latest"
 								target="_blank"
-								class="flex items-center justify-center rounded-md border border-transparent bg-primary px-4 py-3 text-base font-medium text-white shadow hover:opacity-90 sm:px-8 transition-opacity"
+								class="group inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3.5 text-base font-semibold text-white shadow-lg shadow-primary/25 transition-all duration-300 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5"
 							>
-								Download
+								<svg
+									class="w-5 h-5 transition-transform duration-300 group-hover:scale-110"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke="currentColor"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+								</svg>
+								Download for Free
 							</a>
 							<a
 								href="https://github.com/elpeix/apicalls"
 								target="_blank"
-								class="flex items-center justify-center rounded-md border border-transparent bg-surface px-4 py-3 text-base font-medium text-primary hover:bg-bg sm:px-8 transition-colors border-border"
+								class="group inline-flex items-center justify-center gap-2 rounded-lg bg-surface px-6 py-3.5 text-base font-semibold text-text ring-1 ring-border transition-all duration-300 hover:ring-primary/50 hover:bg-surface/80"
 							>
+								<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+									<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+								</svg>
 								View on GitHub
 							</a>
 						</div>
+
+						<!-- Platform availability -->
+						<p class="mt-6 text-sm text-text-muted flex items-center justify-center lg:justify-start gap-2">
+							<span>Available for</span>
+							<span class="font-medium text-text">macOS</span>
+							<span class="text-border">•</span>
+							<span class="font-medium text-text">Windows</span>
+							<span class="text-border">•</span>
+							<span class="font-medium text-text">Linux</span>
+						</p>
 					</div>
-				</div>
-				<div
-					class="relative mt-12 sm:max-w-lg sm:mx-auto lg:mt-0 lg:max-w-none lg:mx-0 lg:col-span-6 lg:flex lg:items-center"
-				>
-					<ImageSlider />
+
+					<!-- App Screenshot -->
+					<div class="relative mt-12 lg:mt-0 lg:col-span-7">
+						<div class="relative">
+							<!-- Glow effect behind the image -->
+							<div
+								class="absolute -inset-4 bg-gradient-to-r from-primary/20 via-primary/10 to-primary/20 rounded-2xl blur-2xl opacity-50"
+							>
+							</div>
+							<div
+								class="relative rounded-xl overflow-hidden ring-1 ring-border shadow-2xl shadow-black/20"
+							>
+								<ImageSlider />
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 
 		<!-- Features Section -->
-		<div id="features" class="bg-bg py-10">
-			<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-				<div class="text-center">
+		<div id="features" class="relative py-20 sm:py-28">
+			<!-- Subtle background -->
+			<div class="absolute inset-0 bg-surface/50"></div>
+
+			<div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+				<div class="text-center max-w-2xl mx-auto">
 					<h2 class="text-base font-semibold uppercase tracking-wide text-primary">Features</h2>
-					<p class="mt-2 text-3xl font-extrabold leading-8 tracking-tight text-text sm:text-4xl">
-						Everything you need
+					<p class="mt-2 text-3xl font-extrabold text-text sm:text-4xl">Everything you need</p>
+					<p class="mt-4 text-lg text-text-muted">
+						Powerful tools to streamline your API development workflow.
 					</p>
 				</div>
 
-				<div class="mt-10">
-					<div class="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
-						<div class="flex flex-col items-center text-center p-3 rounded-lg border border-border">
-							<div
-								class="flex items-center justify-center h-12 w-12 rounded-md bg-surface text-primary border border-border text-3xl mb-4 p-2"
+				<div class="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+					{
+						features.map((feature) => (
+							<a
+								href={feature.link}
+								class="group relative flex flex-col items-center text-center p-6 rounded-xl bg-bg border border-border transition-all duration-300 hover:border-primary/50 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/5"
 							>
-								<Icon name="collection" />
-							</div>
-							<h3 class="text-lg font-medium leading-6 text-text">Collections</h3>
-							<p class="mt-2 text-base text-text-muted">
-								Organize your requests into folders and collections.
-							</p>
-						</div>
+								<div class="relative mb-4">
+									<div class="absolute inset-0 h-12 w-12 rounded-lg bg-primary/10 blur-xl transition-all duration-300 group-hover:bg-primary/20" />
+									<div class="relative flex items-center justify-center h-12 w-12 rounded-lg bg-gradient-to-br from-primary/10 to-primary/5 text-primary ring-1 ring-primary/20 transition-all duration-300 group-hover:ring-primary/40">
+										<Icon name={feature.icon} size={24} />
+									</div>
+								</div>
+								<h3 class="text-lg font-semibold text-text transition-colors duration-300 group-hover:text-primary">
+									{feature.title}
+								</h3>
+								<p class="mt-2 text-sm text-text-muted">{feature.description}</p>
+							</a>
+						))
+					}
+				</div>
 
-						<div class="flex flex-col items-center text-center p-3 rounded-lg border border-border">
-							<div
-								class="flex items-center justify-center h-12 w-12 rounded-md bg-surface text-primary border border-border text-3xl mb-4 p-2"
-							>
-								<Icon name="environment" />
-							</div>
-							<h3 class="text-lg font-medium leading-6 text-text">Environments</h3>
-							<p class="mt-2 text-base text-text-muted">
-								Switch between development, staging, and production.
-							</p>
-						</div>
+				<div class="mt-12 text-center">
+					<a
+						href="/features"
+						class="inline-flex items-center gap-2 text-primary font-medium hover:underline"
+					>
+						View all features
+						<svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M9 5l7 7-7 7"></path>
+						</svg>
+					</a>
+				</div>
+			</div>
+		</div>
 
-						<div class="flex flex-col items-center text-center p-3 rounded-lg border border-border">
-							<div
-								class="flex items-center justify-center h-12 w-12 rounded-md bg-surface text-primary border border-border text-3xl mb-4 p-2"
-							>
-								<Icon name="cookies" />
-							</div>
-							<h3 class="text-lg font-medium leading-6 text-text">Cookies</h3>
-							<p class="mt-2 text-base text-text-muted">
-								Manage per-domain cookies automatically or manually.
-							</p>
-						</div>
-
-						<div class="flex flex-col items-center text-center p-3 rounded-lg border border-border">
-							<div
-								class="flex items-center justify-center h-12 w-12 rounded-md bg-surface text-primary border border-border text-3xl mb-4 p-2"
-							>
-								<Icon name="history" />
-							</div>
-							<h3 class="text-lg font-medium leading-6 text-text">History</h3>
-							<p class="mt-2 text-base text-text-muted">
-								Never lose a request. Search your full request history.
-							</p>
-						</div>
-					</div>
+		<!-- CTA Section -->
+		<div class="relative py-20 sm:py-28">
+			<div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+				<h2 class="text-3xl font-extrabold text-text sm:text-4xl">
+					Ready to simplify your API testing?
+				</h2>
+				<p class="mt-4 text-lg text-text-muted max-w-2xl mx-auto">
+					Join developers who value privacy and efficiency. API Calls is free, open source, and
+					built with care.
+				</p>
+				<div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+					<a
+						href="https://github.com/elpeix/apicalls/releases/latest"
+						target="_blank"
+						class="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-8 py-4 text-base font-semibold text-white shadow-lg shadow-primary/25 transition-all duration-300 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5"
+					>
+						Download Now
+					</a>
+					<a
+						href="/doc"
+						class="inline-flex items-center justify-center gap-2 rounded-lg bg-surface px-8 py-4 text-base font-semibold text-text ring-1 ring-border transition-all duration-300 hover:ring-primary/50"
+					>
+						Read the Docs
+					</a>
 				</div>
 			</div>
 		</div>

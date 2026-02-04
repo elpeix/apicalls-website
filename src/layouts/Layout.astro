@@ -1,4 +1,5 @@
 ---
+import { ViewTransitions } from "astro:transitions";
 import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
@@ -42,6 +43,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || "https://apicalls
 		<meta name="twitter:image" content={new URL(image, Astro.site || "https://apicalls.dev")} />
 
 		<title>{webTitle}</title>
+		<ViewTransitions />
 		<script is:inline>
 			const getTheme = () => {
 				if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
@@ -53,12 +55,27 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || "https://apicalls
 				return "light";
 			};
 
-			const theme = getTheme();
-			if (theme === "dark") {
-				document.documentElement.classList.add("dark");
-			} else {
-				document.documentElement.classList.remove("dark");
-			}
+			const applyTheme = () => {
+				const theme = getTheme();
+				if (theme === "dark") {
+					document.documentElement.classList.add("dark");
+				} else {
+					document.documentElement.classList.remove("dark");
+				}
+			};
+
+			// Apply theme on initial load
+			applyTheme();
+
+			// Preserve theme class during View Transitions
+			document.addEventListener("astro:before-swap", (ev) => {
+				const theme = getTheme();
+				if (theme === "dark") {
+					ev.newDocument.documentElement.classList.add("dark");
+				} else {
+					ev.newDocument.documentElement.classList.remove("dark");
+				}
+			});
 
 			if (typeof localStorage !== "undefined") {
 				const observer = new MutationObserver(() => {
@@ -102,5 +119,32 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || "https://apicalls
 		margin: 0;
 		width: 100%;
 		height: 100%;
+	}
+
+	/* View Transitions - Fade only */
+	@keyframes fade-in {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+
+	@keyframes fade-out {
+		from {
+			opacity: 1;
+		}
+		to {
+			opacity: 0;
+		}
+	}
+
+	::view-transition-old(root) {
+		animation: fade-out 0.2s ease-out;
+	}
+
+	::view-transition-new(root) {
+		animation: fade-in 0.2s ease-in;
 	}
 </style>
