@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://apicalls.dev/sitemap-index.xml

@@ -6,10 +6,12 @@ import Footer from "../components/Footer.astro";
 interface Props {
 	title?: string;
 	description: string;
+	image?: string;
 }
-const { title, description } = Astro.props;
+const { title, description, image = "/images/api-calls.png" } = Astro.props;
 
-const webTitle = `API Calls - ${title || ""}`;
+const webTitle = `API Calls - ${title || "Open Source REST Client"}`;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || "https://apicalls.dev");
 ---
 
 <!doctype html>
@@ -18,8 +20,27 @@ const webTitle = `API Calls - ${title || ""}`;
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="canonical" href={canonicalURL} />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description} />
+		<meta name="keywords" content="REST API client, API testing, Postman alternative, local-first, privacy, open source, HTTP client" />
+		<meta name="author" content="elpeix" />
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={canonicalURL} />
+		<meta property="og:title" content={webTitle} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={new URL(image, Astro.site || "https://apicalls.dev")} />
+		<meta property="og:site_name" content="API Calls" />
+
+		<!-- Twitter -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:url" content={canonicalURL} />
+		<meta name="twitter:title" content={webTitle} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={new URL(image, Astro.site || "https://apicalls.dev")} />
+
 		<title>{webTitle}</title>
 		<script is:inline>
 			const getTheme = () => {
